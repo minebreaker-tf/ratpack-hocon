@@ -12,6 +12,8 @@ import ratpack.server.RatpackServer;
 import ratpack.server.ServerConfig;
 import ratpack.test.embed.EmbeddedApp;
 
+import java.util.List;
+
 import static com.google.common.truth.Truth.assertThat;
 
 public class Sample {
@@ -23,6 +25,7 @@ public class Sample {
         private int id;
         private String name;
         private InnerConfig inner;
+        private List<String> list;
 
         @Data
         @AllArgsConstructor
@@ -59,6 +62,7 @@ public class Sample {
 
             assertThat( result.getId() ).isEqualTo( 123 );
             assertThat( result.getName() ).isEqualTo( "hoge" );
+            assertThat( result.getList() ).containsExactly( "foo", "bar" );
             assertThat( result.getInner().getValue() ).isTrue();
         } );
 
