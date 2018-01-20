@@ -3,7 +3,8 @@
 HOCON extension for Ratpack
 
 [![CircleCI](https://circleci.com/bb/minebreaker_tf/ratpack-hocon.svg?style=svg)](https://circleci.com/bb/minebreaker_tf/ratpack-hocon)
-![](https://img.shields.io/badge/maturity-experimental-green.svg)
+![](https://img.shields.io/badge/maturity-development-green.svg)
+![](https://img.shields.io/badge/license-MIT-green.svg)
 
 
 This tiny library provides `HoconConfigSource` to use HOCON configuration file
@@ -37,3 +38,8 @@ ratpack {
 
 `HoconConfigSource` will use `Config.load()` by default.
 You can pass `Config` for flexible behavior.
+
+
+## License
+
+MIT
