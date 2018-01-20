@@ -16,6 +16,23 @@ as a Ratpack `ConfigSource`.
 [HOCON](https://github.com/lightbend/config/blob/master/HOCON.md)  
 
 
+## Gradle
+
+
+## Gradle
+
+```groovy
+repositories {
+    maven {
+        url  "https://dl.bintray.com/minebreaker/test"
+    }
+}
+dependencies {
+    compile 'rip.deadcode:ratpack-hocon:1.0'
+}
+```
+
+
 ## How to use
 
 Instantiate `HoconConfigSource` and give it to the `ServerConfig`.
