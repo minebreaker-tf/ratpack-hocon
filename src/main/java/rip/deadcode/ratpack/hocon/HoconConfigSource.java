@@ -73,7 +73,7 @@ public final class HoconConfigSource implements ConfigSource {
                 arrayNode.add( walk( (ConfigObject) each, objectMapper ) );
                 break;
             case LIST:
-                arrayNode.add( walkList( config, objectMapper ) );
+                arrayNode.add( walkList( (ConfigList) each, objectMapper ) );
                 break;
             case NUMBER:
                 arrayNode.add( ( (Number) each.unwrapped() ).longValue() );
