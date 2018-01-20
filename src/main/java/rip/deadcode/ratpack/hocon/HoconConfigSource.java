@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.typesafe.config.*;
+import ratpack.api.Nullable;
 import ratpack.config.ConfigSource;
 import ratpack.file.FileSystemBinding;
 
@@ -11,11 +12,22 @@ import java.util.Map;
 
 public final class HoconConfigSource implements ConfigSource {
 
+    @Nullable
+    private final Config config;
+
+    public HoconConfigSource() {
+        this.config = null;
+    }
+
+    public HoconConfigSource( Config config ) {
+        this.config = config;
+    }
+
     @Override
     public ObjectNode loadConfigData(
             ObjectMapper objectMapper, FileSystemBinding fileSystemBinding ) throws Exception {
 
-        Config config = ConfigFactory.load();
+        Config config = this.config == null ? ConfigFactory.load() : this.config;
         Config ratpackConfig = config.getConfig( "ratpack" );
 
         return walk( ratpackConfig.root(), objectMapper );
