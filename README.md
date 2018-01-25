@@ -18,9 +18,6 @@ as a Ratpack `ConfigSource`.
 
 ## Gradle
 
-
-## Gradle
-
 ```groovy
 repositories {
     maven {
