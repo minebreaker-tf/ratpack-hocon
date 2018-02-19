@@ -12,7 +12,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
 group 'rip.deadcode'
-version '1.0'
+version '1.0.1'
 
 sourceCompatibility = 1.8
 
@@ -22,20 +22,17 @@ repositories {
 
 dependencies {
     compile(
-            'io.ratpack:ratpack-core:1.5.1',
-
-//            'com.google.guava:guava:23.5-jre',
-//            'com.google.code.findbugs:jsr305:2.0.1',
-            'com.typesafe:config:1.3.1',
+            'io.ratpack:ratpack-core:1.5.2',
+            'com.typesafe:config:1.3.2',
     )
     testCompile(
-            'io.ratpack:ratpack-test:1.5.1',
+            'io.ratpack:ratpack-test:1.5.2',
 
             'com.google.code.gson:gson:2.8.2',
 
             'junit:junit:4.12',
-            'com.google.truth:truth:0.36',
-            'org.mockito:mockito-core:2.8.47',
+            'com.google.truth:truth:0.39',
+            'org.mockito:mockito-core:2.15.0',
 //            'com.google.jimfs:jimfs:1.1'
 
             'ch.qos.logback:logback-classic:1.2.3'
