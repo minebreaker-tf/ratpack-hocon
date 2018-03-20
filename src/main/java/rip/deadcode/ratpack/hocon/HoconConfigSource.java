@@ -19,13 +19,13 @@ public final class HoconConfigSource implements ConfigSource {
         this.config = null;
     }
 
-    public HoconConfigSource( Config config ) {
+    public HoconConfigSource( @Nullable Config config ) {
         this.config = config;
     }
 
     @Override
     public ObjectNode loadConfigData(
-            ObjectMapper objectMapper, FileSystemBinding fileSystemBinding ) throws Exception {
+            ObjectMapper objectMapper, FileSystemBinding fileSystemBinding ) {
 
         Config config = this.config == null ? ConfigFactory.load() : this.config;
         Config ratpackConfig = config.getConfig( "ratpack" );
@@ -47,7 +47,7 @@ public final class HoconConfigSource implements ConfigSource {
                 break;
             case NUMBER:
                 Object number = entry.getValue().unwrapped();
-                if ( number instanceof Float || number instanceof Double ) {
+                if ( number instanceof Double ) {
                     node.put( entry.getKey(), ( (Number) number ).doubleValue() );
                 } else {
                     node.put( entry.getKey(), ( (Number) number ).longValue() );
@@ -82,7 +82,7 @@ public final class HoconConfigSource implements ConfigSource {
                 break;
             case NUMBER:
                 Number number = (Number) each.unwrapped();
-                if ( number instanceof Float || number instanceof Double ) {
+                if ( number instanceof Double ) {
                     arrayNode.add( ( number ).doubleValue() );
                 } else {
                     arrayNode.add( ( number ).longValue() );

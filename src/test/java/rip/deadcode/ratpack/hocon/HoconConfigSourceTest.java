@@ -45,6 +45,15 @@ public class HoconConfigSourceTest {
     }
 
     @Test
+    public void testDefaultLoading() {
+        // Loads reference.conf
+        ServerConfig config = ServerConfig.builder().add( new HoconConfigSource() ).build();
+
+        assertThat( config.isDevelopment() ).isTrue();
+        assertThat( config.getPort() ).isEqualTo( 8080 );
+    }
+
+    @Test
     public void testInteger() {
         Map<String, Object> params = ImmutableMap.of( "ratpack.test", 123 );
         Integer result = create( params ).get( "/test", Integer.class );
