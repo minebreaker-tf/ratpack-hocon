@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import lombok.Data;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import ratpack.server.ServerConfig;
 
 import java.util.Arrays;
