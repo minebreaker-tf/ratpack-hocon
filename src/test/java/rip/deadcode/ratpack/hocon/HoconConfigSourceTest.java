@@ -4,11 +4,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.junit.Test;
 import ratpack.server.ServerConfig;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,10 +45,31 @@ public class HoconConfigSourceTest {
     }
 
     @Test
-    public void testNumber() {
+    public void testInteger() {
         Map<String, Object> params = ImmutableMap.of( "ratpack.test", 123 );
         Integer result = create( params ).get( "/test", Integer.class );
         assertThat( result ).isEqualTo( 123 );
+    }
+
+    @Test
+    public void testLong() {
+        Map<String, Object> params = ImmutableMap.of( "ratpack.test", Long.MAX_VALUE );
+        Long result = create( params ).get( "/test", Long.class );
+        assertThat( result ).isEqualTo( Long.MAX_VALUE );
+    }
+
+    @Test
+    public void testFloat() {
+        Map<String, Object> params = ImmutableMap.of( "ratpack.test", 123.456f );
+        Float result = create( params ).get( "/test", Float.class );
+        assertThat( result ).isWithin( 0.001f ).of( 123.456f );
+    }
+
+    @Test
+    public void testDouble() {
+        Map<String, Object> params = ImmutableMap.of( "ratpack.test", 123.456 );
+        Double result = create( params ).get( "/test", Double.class );
+        assertThat( result ).isWithin( 0.001 ).of( 123.456 );
     }
 
     @Test
@@ -74,10 +95,45 @@ public class HoconConfigSourceTest {
     }
 
     @Test
-    public void testList() {
+    public void testIntegerInList() {
+        Map<String, Object> params = ImmutableMap.of( "ratpack.test", ImmutableList.of( 123, 456 ) );
+        List result = create( params ).get( "/test", List.class );
+        assertThat( result ).hasSize( 2 );
+        assertThat( (Long) result.get( 0 ) ).isEqualTo( 123 );
+        assertThat( (Long) result.get( 1 ) ).isEqualTo( 456 );
+    }
+
+    @Test
+    public void testDoubleInList() {
+        Map<String, Object> params = ImmutableMap.of( "ratpack.test", ImmutableList.of( 123.456, 456.789 ) );
+        List result = create( params ).get( "/test", List.class );
+        assertThat( result ).hasSize( 2 );
+        assertThat( (Double) result.get( 0 ) ).isWithin( 0.001 ).of( 123.456 );
+        assertThat( (Double) result.get( 1 ) ).isWithin( 0.001 ).of( 456.789 );
+    }
+
+    @Test
+    public void testBooleanInList() {
+        Map<String, Object> params = ImmutableMap.of( "ratpack.test", ImmutableList.of( true, false ) );
+        List result = create( params ).get( "/test", List.class );
+        assertThat( result ).hasSize( 2 );
+        assertThat( (Boolean) result.get( 0 ) ).isTrue();
+        assertThat( (Boolean) result.get( 1 ) ).isFalse();
+    }
+
+    @Test
+    public void testStringInList() {
         Map<String, Object> params = ImmutableMap.of( "ratpack.test", ImmutableList.of( "foo", "bar" ) );
         List result = create( params ).get( "/test", List.class );
         assertThat( result ).containsExactly( "foo", "bar" );
+    }
+
+    @Test
+    public void testNullInList() {
+        Map<String, Object> params = ImmutableMap.of( "ratpack.test", Arrays.asList( null, null ) );
+        List result = create( params ).get( "/test", List.class );
+        assertThat( result ).hasSize( 2 );
+        assertThat( result ).containsExactly( null, null );
     }
 
     @Test
@@ -105,12 +161,6 @@ public class HoconConfigSourceTest {
         Bean1 result = create( params ).get( "/test", Bean1.class );
         assertThat( result.getFoo() ).containsExactly( "hoge", "piyo" );
         assertThat( result.getBar() ).isEqualTo( "buz" );
-    }
-
-    @Data
-    @AllArgsConstructor
-    private static final class Bean2 {
-        private String foo;
     }
 
     @Test

@@ -46,7 +46,12 @@ public final class HoconConfigSource implements ConfigSource {
                 node.set( entry.getKey(), walkList( (ConfigList) entry.getValue(), objectMapper ) );
                 break;
             case NUMBER:
-                node.put( entry.getKey(), ( (Number) entry.getValue().unwrapped() ).longValue() );
+                Object number = entry.getValue().unwrapped();
+                if ( number instanceof Float || number instanceof Double ) {
+                    node.put( entry.getKey(), ( (Number) number ).doubleValue() );
+                } else {
+                    node.put( entry.getKey(), ( (Number) number ).longValue() );
+                }
                 break;
             case BOOLEAN:
                 node.put( entry.getKey(), (Boolean) entry.getValue().unwrapped() );
@@ -76,7 +81,12 @@ public final class HoconConfigSource implements ConfigSource {
                 arrayNode.add( walkList( (ConfigList) each, objectMapper ) );
                 break;
             case NUMBER:
-                arrayNode.add( ( (Number) each.unwrapped() ).longValue() );
+                Number number = (Number) each.unwrapped();
+                if ( number instanceof Float || number instanceof Double ) {
+                    arrayNode.add( ( number ).doubleValue() );
+                } else {
+                    arrayNode.add( ( number ).longValue() );
+                }
                 break;
             case BOOLEAN:
                 arrayNode.add( (Boolean) each.unwrapped() );
