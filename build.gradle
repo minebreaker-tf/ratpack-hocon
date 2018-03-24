@@ -16,6 +16,8 @@ group 'rip.deadcode'
 version '1.0.2'
 
 sourceCompatibility = 1.8
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
 
 repositories {
     mavenCentral()
@@ -37,7 +39,6 @@ dependencies {
 
             'ch.qos.logback:logback-classic:1.2.3'
     )
-    testCompileOnly 'org.projectlombok:lombok:1.16.20'
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
 }
 

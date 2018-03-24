@@ -1,9 +1,6 @@
 package rip.deadcode.ratpack.hocon;
 
 import com.google.gson.Gson;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.junit.Test;
 import ratpack.func.Action;
 import ratpack.handling.Chain;
@@ -18,20 +15,54 @@ import static com.google.common.truth.Truth.assertThat;
 
 public class Sample {
 
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
     private static final class TestConfig {
         private int id;
         private String name;
         private InnerConfig inner;
         private List<String> list;
 
-        @Data
-        @AllArgsConstructor
-        @NoArgsConstructor
         private static final class InnerConfig {
             private Boolean value;
+
+            public Boolean getValue() {
+                return value;
+            }
+
+            public void setValue( Boolean value ) {
+                this.value = value;
+            }
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId( int id ) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName( String name ) {
+            this.name = name;
+        }
+
+        public InnerConfig getInner() {
+            return inner;
+        }
+
+        public void setInner( InnerConfig inner ) {
+            this.inner = inner;
+        }
+
+        public List<String> getList() {
+            return list;
+        }
+
+        public void setList( List<String> list ) {
+            this.list = list;
         }
     }
 

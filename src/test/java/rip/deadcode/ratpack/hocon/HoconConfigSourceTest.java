@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import lombok.Data;
 import org.junit.jupiter.api.Test;
 import ratpack.server.ServerConfig;
 
@@ -154,10 +153,25 @@ public class HoconConfigSourceTest {
         assertThat( result.get( 1 ) ).isEqualTo( "bar" );
     }
 
-    @Data
     private static final class Bean1 {
         private List<String> foo;
         private String bar;
+
+        public List<String> getFoo() {
+            return foo;
+        }
+
+        public void setFoo( List<String> foo ) {
+            this.foo = foo;
+        }
+
+        public String getBar() {
+            return bar;
+        }
+
+        public void setBar( String bar ) {
+            this.bar = bar;
+        }
     }
 
     @Test
