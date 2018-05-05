@@ -12,8 +12,8 @@ apply plugin: 'jacoco'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
-group 'rip.deadcode'
-version '1.0.2'
+group = 'rip.deadcode'
+version = '1.0.2'
 
 sourceCompatibility = 1.8
 compileJava.options.encoding = "UTF-8"
@@ -31,12 +31,12 @@ dependencies {
     testCompile(
             'io.ratpack:ratpack-test:1.5.4',
 
-            'com.google.code.gson:gson:2.8.2',
+            'com.google.code.gson:gson:2.8.4',
 
             'org.junit.jupiter:junit-jupiter-api:5.1.0',
-            'com.google.truth:truth:0.39',
-            'com.google.truth.extensions:truth-java8-extension:0.39',
-            'org.mockito:mockito-core:2.18.0',
+            'com.google.truth:truth:0.40',
+            'com.google.truth.extensions:truth-java8-extension:0.40',
+            'org.mockito:mockito-core:2.18.3',
 
             'ch.qos.logback:logback-classic:1.2.3'
     )
@@ -65,8 +65,8 @@ test {
 
 jacocoTestReport {
     reports {
-        xml.enabled true
-        html.enabled true
+        xml.enabled = true
+        html.enabled = true
     }
 }
 
