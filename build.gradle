@@ -31,11 +31,11 @@ dependencies {
     testCompile(
             'io.ratpack:ratpack-test:1.5.4',
 
-            'com.google.code.gson:gson:2.8.4',
+            'com.google.code.gson:gson:2.8.5',
 
             'org.junit.jupiter:junit-jupiter-api:5.1.0',
-            'com.google.truth:truth:0.40',
-            'com.google.truth.extensions:truth-java8-extension:0.40',
+            'com.google.truth:truth:0.41',
+            'com.google.truth.extensions:truth-java8-extension:0.41',
             'org.mockito:mockito-core:2.18.3',
 
             'ch.qos.logback:logback-classic:1.2.3'
